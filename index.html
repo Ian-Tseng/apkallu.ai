@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apkallu</title>
+  <meta name="description" content="Apkallu builds AI infrastructure for real-time coordination across complex real-world systems." />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #11182d;
+      --panel-soft: #151f3a;
+      --text: #f5f7fb;
+      --muted: #aab4d4;
+      --accent: #7dd3fc;
+      --accent-2: #a78bfa;
+      --line: rgba(255,255,255,0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, rgba(125, 211, 252, 0.18), transparent 34%),
+                  radial-gradient(circle at top right, rgba(167, 139, 250, 0.16), transparent 32%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: min(1120px, 92vw);
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .brand {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .hero {
+      padding: 88px 0 56px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--accent);
+      background: rgba(255,255,255,0.04);
+      font-size: 0.9rem;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.08em;
+    }
+
+    .tagline {
+      margin: 26px auto 0;
+      max-width: 880px;
+      font-size: clamp(1.25rem, 2.6vw, 2rem);
+      color: var(--text);
+      line-height: 1.25;
+      font-weight: 650;
+    }
+
+    .subtagline {
+      margin: 20px auto 0;
+      max-width: 760px;
+      font-size: 1.05rem;
+      color: var(--muted);
+    }
+
+    .cta-row {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      font-weight: 650;
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #07101f;
+      border: 0;
+    }
+
+    section {
+      padding: 64px 0;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      margin: 0 0 16px;
+      letter-spacing: -0.04em;
+    }
+
+    .section-lead {
+      color: var(--muted);
+      max-width: 740px;
+      margin: 0 0 34px;
+      font-size: 1.05rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+      padding: 24px;
+      background: rgba(17, 24, 45, 0.78);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .demo-card {
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .video-box {
+      position: relative;
+      background: #050814;
+      border-bottom: 1px solid var(--line);
+    }
+
+    video, iframe {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      background: #050814;
+    }
+
+    .video-placeholder {
+      display: grid;
+      place-items: center;
+      min-height: 280px;
+      aspect-ratio: 16 / 9;
+      color: var(--muted);
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(135deg, rgba(125,211,252,0.08), rgba(167,139,250,0.08));
+    }
+
+    .demo-copy {
+      padding: 22px;
+    }
+
+    .demo-label {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: var(--accent);
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+    }
+
+    .story-step {
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.045);
+      border: 1px solid var(--line);
+    }
+
+    .story-step strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .story-step span {
+      color: var(--muted);
+    }
+
+    .highlight {
+      color: var(--accent);
+    }
+
+    footer {
+      padding: 42px 0;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+
+    @media (max-width: 800px) {
+      .nav-links {
+        display: none;
+      }
+
+      .grid,
+      .grid.two,
+      .story {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 64px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand" style="display:flex; align-items:center; gap:10px;">
+          <img src="assets/logo.png" alt="Apkallu logo" style="height:28px; width:auto;" />
+          <span>Apkallu</span>
+        </div>
+        <div class="nav-links">
+          <a href="#demo">Demo</a>
+          <a href="#approach">Approach</a>
+          <a href="#vision">Vision</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">AI infrastructure for real-world coordination</div>
+        <h1>Apkallu</h1>
+        <p class="tagline">AI infrastructure for real-time coordination across complex real-world systems.</p>
+        <p class="subtagline">
+          We build simulation and sensor-driven AI systems that help dynamic environments — starting with traffic — become more predictable, coordinated, and safe.
+        </p>
+        <div class="cta-row">
+          <a class="button primary" href="#demo">View demo</a>
+          <a class="button" href="#contact">Contact</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo">
+      <div class="container">
+        <h2 class="section-title">Prototype Demos</h2>
+        <p class="section-lead">
+          Our current prototypes show two core capabilities: understanding real-world environments from sensors, and coordinating multi-agent behavior through simulation.
+        </p>
+
+        <div class="grid two">
+          <article class="card demo-card">
+            <div class="video-box">
+              <!-- Option A: local video. Put your file at assets/marl-demo.mp4 -->
+              <video controls muted playsinline poster="assets/marl-poster.jpg">
+                <source src="assets/marl-demo.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+
+              <!-- Option B: YouTube embed. Replace the video above with this iframe if preferred.
+              <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="MARL traffic coordination demo" allowfullscreen></iframe>
+              -->
+            </div>
+            <div class="demo-copy">
+              <span class="demo-label">Coordination demo</span>
+              <h3>Multi-Agent Traffic Simulation</h3>
+              <p>
+                Prototype: MARL-based simulation for coordinating vehicles and dynamic traffic environments in real time.
+              </p>
+            </div>
+          </article>
+
+          <article class="card demo-card">
+            <div class="video-box">
+              <!-- Put your file at assets/sensor-demo.mp4 -->
+              <video controls muted playsinline poster="assets/sensor-poster.jpg">
+                <source src="assets/sensor-demo.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+
+              <!-- YouTube alternative:
+              <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Sensor visualization demo" allowfullscreen></iframe>
+              -->
+            </div>
+            <div class="demo-copy">
+              <span class="demo-label">Perception demo</span>
+              <h3>Sensor-Driven Environment Visualization</h3>
+              <p>
+                Prototype: sensor-driven visualization and reconstruction of real-world traffic environments.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="problem">
+      <div class="container">
+        <h2 class="section-title">Real-World Systems Are Hard to Coordinate</h2>
+        <p class="section-lead">
+          Traffic, vehicles, sensors, and autonomous agents generate continuous streams of information. But most systems remain fragmented, reactive, and difficult to coordinate at scale.
+        </p>
+        <div class="grid">
+          <div class="card">
+            <h3>Fragmented Sensing</h3>
+            <p>Sensor data exists across many sources, but it is often disconnected from decision-making systems.</p>
+          </div>
+          <div class="card">
+            <h3>Dynamic Agents</h3>
+            <p>Human drivers, vehicles, and autonomous systems interact continuously under uncertainty.</p>
+          </div>
+          <div class="card">
+            <h3>Reactive Infrastructure</h3>
+            <p>Existing systems often respond after problems occur, instead of anticipating and coordinating behavior.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="approach">
+      <div class="container">
+        <h2 class="section-title">Our Approach</h2>
+        <p class="section-lead">
+          Apkallu develops AI systems that model, simulate, and coordinate real-world environments using sensor-driven data and multi-agent intelligence.
+        </p>
+        <div class="story">
+          <div class="story-step">
+            <strong>1. Understand</strong>
+            <span>Use sensors and data streams to reconstruct dynamic real-world environments.</span>
+          </div>
+          <div class="story-step">
+            <strong>2. Simulate</strong>
+            <span>Model interactions between vehicles, humans, sensors, and autonomous agents.</span>
+          </div>
+          <div class="story-step">
+            <strong>3. Coordinate</strong>
+            <span>Enable real-time decisions that improve system-level safety and efficiency.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="building">
+      <div class="container">
+        <h2 class="section-title">What We Are Building</h2>
+        <div class="grid two">
+          <div class="card">
+            <h3>Simulation-Driven Coordination Engine</h3>
+            <p>AI systems for modeling and coordinating multi-agent behavior in dynamic environments.</p>
+          </div>
+          <div class="card">
+            <h3>Sensor-Based World Modeling</h3>
+            <p>Tools to turn raw sensor streams into structured representations of real-world systems.</p>
+          </div>
+          <div class="card">
+            <h3>Traffic Intelligence Layer</h3>
+            <p>Starting with real-time traffic systems, vehicle streams, and sensor networks.</p>
+          </div>
+          <div class="card">
+            <h3>Human–Autonomous System Interaction</h3>
+            <p>Infrastructure for safer coordination between humans, vehicles, and autonomous agents.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="vision">
+      <div class="container">
+        <h2 class="section-title">Traffic Is the Starting Point</h2>
+        <p class="section-lead">
+          We believe the same principles behind traffic coordination apply to broader complex systems: smart cities, robotics, infrastructure, and future human–machine environments.
+        </p>
+        <div class="card">
+          <h3>Our Vision</h3>
+          <p>
+            To build foundational AI infrastructure that enables complex real-world systems to coordinate in real time — improving safety, efficiency, and adaptability at scale.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="team">
+      <div class="container">
+        <h2 class="section-title">Team</h2>
+        <p class="section-lead">
+          Apkallu is built by a small team working at the intersection of artificial intelligence, simulation, sensor systems, and real-time coordination.
+        </p>
+        <div class="grid">
+          <div class="card">
+            <h3>AI Systems</h3>
+            <p>Multi-agent learning, prediction, and coordination.</p>
+          </div>
+          <div class="card">
+            <h3>Simulation</h3>
+            <p>Dynamic environment modeling and prototype validation.</p>
+          </div>
+          <div class="card">
+            <h3>Real-World Sensing</h3>
+            <p>Sensor visualization, reconstruction, and system integration.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <h2 class="section-title">Contact</h2>
+        <p class="section-lead">
+          Interested in real-time AI coordination, traffic intelligence, or autonomous systems? Contact us.
+        </p>
+        <div class="card">
+          <p><strong>Email:</strong> <a href="mailto:choisyin@gmail.com">choisyin@gmail.com</a></p>
+          <p><strong>GitHub:</strong> <a href="https://github.com/Ian-Tseng" target="_blank" rel="noopener">Ian Tseng (GitHub)</a></p>
+          <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/company/apkallu-ai/" target="_blank" rel="noopener">Apkallu (LinkedIn)</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      Built by Apkallu — AI infrastructure for real-world coordination.
+    </div>
+  </footer>
+</body>
+</html>
